@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en" class="selection:bg-[#A94442] selection:text-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prachi Jain | Paado Ji</title>
+    <meta name="description" content="A curated dataset of Prachi Jain, also known as Paado Ji and Jiggly Puff.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#F7F5F2',
+                        text: '#1C1C1C',
+                        accentRed: '#A94442',
+                        accentGreen: '#708B75',
+                    },
+                    fontFamily: {
+                        serif: ['"DM Serif Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F7F5F2;
+            color: #1C1C1C;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: -150%;
+            left: -150%;
+            width: 300%;
+            height: 300%;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            20% { transform: translate(-15%, 5%); }
+            30% { transform: translate(7%, -25%); }
+            40% { transform: translate(-5%, 25%); }
+            50% { transform: translate(-15%, 10%); }
+            60% { transform: translate(15%, 0%); }
+            70% { transform: translate(0%, 15%); }
+            80% { transform: translate(3%, 35%); }
+            90% { transform: translate(-10%, 10%); }
+        }
+
+        .custom-cursor {
+            width: 8px;
+            height: 8px;
+            background: #A94442;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease-out;
+        }
+
+        .custom-cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(169, 68, 66, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease-out;
+        }
+
+        .image-reveal-container {
+            position: relative;
+            overflow: hidden;
+            background: #E8E4DF;
+        }
+
+        .parallax-img, .identity-img {
+            will-change: transform;
+        }
+
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .reveal-text span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+
+        .horizontal-container {
+            display: flex;
+            width: fit-content;
+        }
+
+        .driving-bg {
+            background: #1C1C1C;
+        }
+
+        .floating-bg {
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-48%, -52%) scale(1.05); }
+        }
+
+        #motivational-punchline {
+            transition: text-shadow 0.8s ease, color 0.8s ease;
+        }
+
+        #motivational-punchline:hover {
+            text-shadow: 0 0 40px rgba(169, 68, 66, 0.4);
+            color: #A94442;
+        }
+    </style>
+</head>
+<body class="bg-bg text-text antialiased cursor-none">
+    <div class="grain"></div>
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-follower" id="cursor-follower"></div>
+
+    <!-- Section 1: Opening -->
+    <section id="opening" class="h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden bg-bg z-[100]">
+        <div class="space-y-6">
+            <h1 id="name" class="font-serif text-7xl md:text-9xl leading-none reveal-text">
+                <span>Prachi Jain</span>
+            </h1>
+            <p id="functional" class="font-sans text-sm md:text-base tracking-[0.3em] uppercase text-text/40 opacity-0">
+                rarely functional before 10am.
+            </p>
+        </div>
+        <button id="continue-btn" class="mt-24 px-10 py-4 border border-text/10 text-[10px] tracking-[0.5em] uppercase opacity-0 transition-all duration-700 hover:border-accentRed hover:text-accentRed">
+            continue
+        </button>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="opacity-0">
+        <!-- Section 2: Introduction -->
+        <section class="min-h-screen py-32 px-8 md:px-24 flex flex-col justify-center">
+            <div class="max-w-5xl">
+                <div class="space-y-12">
+                    <h2 class="text-5xl md:text-8xl font-serif leading-[1.1] reveal-text intro-line">
+                        <span>Interior designer.</span>
+                    </h2>
+                    <h2 class="text-5xl md:text-8xl font-serif leading-[1.1] reveal-text intro-line">
+                        <span>Jodhpur.</span>
+                    </h2>
+                    <h2 class="text-5xl md:text-8xl font-serif leading-[1.1] reveal-text intro-line">
+                        <span>Functionally nocturnal.</span>
+                    </h2>
+                </div>
+                <div class="mt-16 text-xl md:text-2xl font-sans text-text/60 group relative inline-block opacity-0" id="paado-reveal">
+                    also known as <span class="text-text border-b border-accentRed/30 hover:border-accentRed cursor-help transition-all duration-500">Paado Ji.</span>
+                    <div class="absolute -top-12 left-0 bg-accentRed text-white text-[10px] tracking-widest uppercase py-2 px-4 rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 pointer-events-none">
+                        details remain unclear.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Evidence 01 (Placeholder) -->
+        <section class="min-h-screen py-32 px-8 md:px-24 flex flex-col items-center justify-center">
+            <div class="w-full max-w-lg space-y-10 group">
+                <div class="image-reveal-container aspect-[3/4] w-full border border-text/5 overflow-hidden relative group">
+                    <img src="1.jpg" alt="Evidence 01" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 parallax-img">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700"></div>
+                </div>
+                <div class="space-y-3 opacity-0 evidence-subtext">
+                    <div class="font-serif text-4xl">Evidence 01</div>
+                    <div class="font-sans text-xs tracking-widest text-text/40 uppercase italic">captured at a socially acceptable hour.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Morning System Failure -->
+        <section id="morning-sequence" class="min-h-[400vh] relative bg-bg">
+            <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+                <div class="text-center space-y-32 z-10">
+                    <div class="morning-item text-4xl md:text-7xl font-serif text-text/10 transition-colors duration-500">Alarm rings.</div>
+                    <div class="morning-item text-4xl md:text-7xl font-serif text-text/10 transition-colors duration-500">optimism.</div>
+                    <div class="morning-item text-4xl md:text-7xl font-serif text-text/10 transition-colors duration-500">snooze.</div>
+                    <div class="morning-item text-4xl md:text-7xl font-serif text-text/10 transition-colors duration-500">catastrophic miscalculation.</div>
+                </div>
+                
+                <!-- Background Clock -->
+                <div id="clock-container" class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                    <div id="clock" class="w-[80vh] h-[80vh] rounded-full border border-text flex items-center justify-center">
+                        <div class="w-[2px] h-[35vh] bg-text origin-bottom absolute bottom-1/2" id="clock-hand"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Food Philosophy -->
+        <section class="min-h-screen py-32 px-8 md:px-24 flex flex-col justify-center">
+            <div class="max-w-4xl mx-auto w-full">
+                <p class="text-[10px] tracking-[0.5em] uppercase text-text/40 mb-12 opacity-0 food-reveal">Dietary Thesis</p>
+                <h2 class="text-4xl md:text-6xl font-serif leading-tight mb-24 opacity-0 food-reveal">dietary decisions are surprisingly consistent.</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+                    <div class="space-y-16">
+                        <div class="food-word text-7xl md:text-9xl font-serif text-accentGreen/20 italic">loki.</div>
+                        <div class="food-word text-7xl md:text-9xl font-serif text-accentGreen/20 italic">matar.</div>
+                    </div>
+                    <div class="flex flex-col justify-end pb-12 space-y-8 opacity-0 food-reveal">
+                        <div class="h-[1px] w-full bg-text/10"></div>
+                        <div class="text-sm tracking-widest uppercase text-text/40">and occasionally:</div>
+                        <div class="text-4xl font-serif">popcorn + chilli lemon lays.</div>
+                        <div class="text-[10px] tracking-widest text-accentGreen uppercase">a balanced ecosystem.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Identity Archive -->
+        <section id="identity-section" class="min-h-screen bg-text text-bg py-48 overflow-hidden">
+            <div class="px-8 md:px-24 mb-32">
+                <h2 class="text-[10px] tracking-[0.8em] uppercase text-bg/40">Identity Archive / 003</h2>
+            </div>
+            
+            <div class="horizontal-scroll flex px-8 md:px-24 space-x-24 md:space-x-48 items-center">
+                <!-- Persona 01: Prachi -->
+                <div class="identity-card flex-shrink-0 w-[70vw] md:w-[35vw] group">
+                    <div class="aspect-[4/5] overflow-hidden relative mb-8">
+                        <img src="5.jpg" alt="Prachi Jain" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 identity-img">
+                        <div class="absolute top-6 left-6 text-white text-[8px] tracking-[0.5em] uppercase opacity-40">Dataset / P-01</div>
+                    </div>
+                    <div class="text-6xl md:text-8xl font-serif leading-none tracking-tighter group-hover:text-accentRed transition-colors duration-700">Prachi</div>
+                    <div class="mt-4 text-xs tracking-[0.4em] uppercase text-bg/30 italic">official release</div>
+                </div>
+
+                <!-- Persona 02: Paado Ji -->
+                <div class="identity-card flex-shrink-0 w-[70vw] md:w-[35vw] group">
+                    <div class="aspect-[4/5] overflow-hidden relative mb-8">
+                        <img src="2.jpg" alt="Paado Ji" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 identity-img">
+                        <div class="absolute top-6 left-6 text-white text-[8px] tracking-[0.5em] uppercase opacity-40">Dataset / P-02</div>
+                    </div>
+                    <div class="text-6xl md:text-8xl font-serif leading-none tracking-tighter group-hover:italic transition-all duration-700">Paado Ji</div>
+                    <div class="mt-4 text-xs tracking-[0.4em] uppercase text-bg/30 italic">environment dependent</div>
+                </div>
+
+                <!-- Persona 03: Jiggly Puff -->
+                <div class="identity-card flex-shrink-0 w-[70vw] md:w-[35vw] group">
+                    <div class="aspect-[4/5] overflow-hidden relative mb-8">
+                        <img src="4.jpg" alt="Jiggly Puff" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 identity-img">
+                        <div class="absolute top-6 left-6 text-white text-[8px] tracking-[0.5em] uppercase opacity-40">Dataset / P-03</div>
+                    </div>
+                    <div class="text-6xl md:text-8xl font-serif leading-none tracking-tighter group-hover:opacity-50 transition-all duration-700">Jiggly Puff</div>
+                    <div class="mt-4 text-xs tracking-[0.4em] uppercase text-bg/30 italic">unfortunately accurate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: The Driving Incidents -->
+        <section id="driving-section" class="min-h-screen relative bg-[#1C1C1C] flex items-center justify-center overflow-hidden">
+            <!-- Road Animation -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-1/2 left-0 w-full h-[1px] bg-white/50"></div>
+                <div class="road-line absolute top-1/2 left-[-10%] w-20 h-1 bg-white"></div>
+            </div>
+
+            <div class="text-center z-10 px-8 max-w-4xl space-y-16">
+                <div class="driving-text opacity-0 translate-y-10 font-serif text-3xl md:text-5xl text-white/90">She drives a red Access 125.</div>
+                <div class="driving-text opacity-0 translate-y-10 font-serif text-3xl md:text-5xl text-white/50 italic">confidence levels increase dramatically in traffic.</div>
+                
+                <div id="shout-container" class="relative py-12">
+                    <h2 id="shout" class="text-6xl md:text-[10rem] font-serif font-bold text-white uppercase tracking-tighter opacity-0 scale-90">
+                        Ae chutiye, dekh ke chala na.
+                    </h2>
+                </div>
+                
+                <div class="driving-text opacity-0 translate-y-10">
+                    <div class="h-[1px] w-24 bg-white/20 mx-auto mb-8"></div>
+                    <div class="text-[10px] tracking-[0.5em] uppercase text-white/30">communication style: unexpectedly efficient.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Evidence 02 (Placeholder) -->
+        <section class="min-h-screen py-48 px-8 md:px-24 flex flex-col items-center justify-center">
+            <div class="w-full max-w-5xl space-y-12 group">
+                <div class="image-reveal-container aspect-video md:aspect-[21/9] w-full border border-text/5 overflow-hidden relative group">
+                    <img src="3.jpg" alt="Evidence 02" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 parallax-img">
+                    <div class="absolute inset-0 bg-accentRed/5 mix-blend-overlay"></div>
+                    <div class="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 border border-white/20">
+                        <span class="text-[10px] tracking-[0.4em] uppercase text-white">Status: Jain-uine</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-end opacity-0 evidence-subtext-2">
+                    <div class="space-y-2">
+                        <div class="font-serif text-4xl">Evidence 02</div>
+                        <div class="font-sans text-xs tracking-widest text-text/40 uppercase italic">further investigation unnecessary.</div>
+                    </div>
+                    <div class="text-[10px] font-mono text-text/20 uppercase tracking-widest pb-1">Ref: JDP_INC_002</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Professional Contradictions -->
+        <section class="min-h-screen py-32 px-8 md:px-24 flex flex-col justify-center items-center text-center">
+            <div class="max-w-3xl space-y-20">
+                <h2 class="text-4xl md:text-7xl font-serif reveal-text contradiction-reveal">
+                    <span>She designs interiors.</span>
+                </h2>
+                
+                <div class="flex flex-col md:flex-row gap-12 font-sans text-sm tracking-[0.3em] uppercase text-text/40">
+                    <div class="contradiction-item opacity-0">structured spaces</div>
+                    <div class="contradiction-item opacity-0">careful balance</div>
+                    <div class="contradiction-item opacity-0">thoughtful composition</div>
+                </div>
+
+                <div class="pt-12 opacity-0" id="final-punchline">
+                    <div class="h-[1px] w-12 bg-accentRed mx-auto mb-10"></div>
+                    <h2 class="text-4xl md:text-7xl font-serif text-accentRed italic">none of which apply to mornings.</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Unnecessarily Motivational -->
+        <section id="motivational-section" class="min-h-screen py-32 px-8 md:px-24 flex flex-col items-center justify-center text-center relative overflow-hidden bg-bg">
+            <!-- Warm Lighting Background -->
+            <div class="absolute inset-0 opacity-0 transition-opacity duration-[2000ms]" id="motivational-bg">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(255,210,170,0.15)_0%,transparent_70%)] floating-bg"></div>
+            </div>
+
+            <div class="max-w-4xl space-y-10 z-10">
+                <div class="motivational-line opacity-0 translate-y-8 font-sans text-lg md:text-xl text-text/60 italic">and despite everything…</div>
+                <div class="motivational-line opacity-0 translate-y-8 font-serif text-3xl md:text-5xl">the missed alarms.</div>
+                <div class="motivational-line opacity-0 translate-y-8 font-serif text-3xl md:text-5xl">the traffic rage.</div>
+                <div class="motivational-line opacity-0 translate-y-8 font-serif text-3xl md:text-5xl">the emotional dependence on popcorn and chilli lemon lays.</div>
+                <div class="motivational-line opacity-0 translate-y-8 font-sans text-lg md:text-xl text-text/60 italic">you’re still here.</div>
+                
+                <div class="pt-12">
+                    <h2 id="motivational-punchline" class="text-6xl md:text-[8rem] font-serif font-bold opacity-0 scale-95 cursor-default">
+                        you’ve got this.
+                    </h2>
+                    <p class="motivational-line-small opacity-0 translate-y-4 font-sans text-[10px] tracking-[0.5em] uppercase text-text/40 mt-12">
+                        probably after one more nap, but still.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Final -->
+        <section class="min-h-screen py-32 px-8 md:px-24 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <!-- Background Grain Bloom -->
+            <div class="absolute inset-0 bg-accentRed opacity-0" id="end-bloom"></div>
+
+            <div class="space-y-12 z-10">
+                <h2 class="text-3xl md:text-6xl font-serif opacity-0 end-reveal">This appears to be the complete dataset.</h2>
+                <p class="text-sm tracking-[0.4em] uppercase text-text/40 opacity-0 end-reveal">although sources remain unreliable.</p>
+                
+                <div class="pt-16">
+                    <button id="restart-btn" class="group relative px-16 py-6 overflow-hidden border border-text opacity-0 end-reveal transition-colors duration-500 hover:border-accentRed">
+                        <span class="relative z-10 text-[10px] tracking-[0.6em] uppercase group-hover:text-white transition-colors duration-500">experience again</span>
+                        <div class="absolute inset-0 bg-accentRed transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-12 left-0 w-full px-8 flex justify-between items-end text-[10px] font-mono text-text/20 uppercase tracking-[0.4em]">
+                <div>Verified: 2026</div>
+                <div>Paado Ji / Dataset V.1.0</div>
+                <div>Status: Incomplete</div>
+            </div>
+        </section>
+    </main>
+
+    <div id="easter-egg" class="fixed inset-0 pointer-events-none z-[9999] overflow-hidden"></div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+        // --- CUSTOM CURSOR ---
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        
+        let mouseX = 0, mouseY = 0;
+        let ballX = 0, ballY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            gsap.to(cursor, {
+                x: mouseX - 4,
+                y: mouseY - 4,
+                duration: 0.1,
+                ease: "power2.out"
+            });
+            
+            gsap.to(follower, {
+                x: mouseX - 20,
+                y: mouseY - 20,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+
+        // Hover effects for cursor
+        document.querySelectorAll('button, span, .image-placeholder, .identity-item').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(follower, { scale: 1.5, borderColor: '#A94442', duration: 0.3 });
+                gsap.to(cursor, { scale: 2, duration: 0.3 });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(follower, { scale: 1, borderColor: 'rgba(169, 68, 66, 0.3)', duration: 0.3 });
+                gsap.to(cursor, { scale: 1, duration: 0.3 });
+            });
+        });
+
+        // --- LENIS SMOOTH SCROLL ---
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            wheelMultiplier: 1,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- OPENING SEQUENCE ---
+        const openingTl = gsap.timeline();
+        
+        openingTl.to("#name span", {
+            y: 0,
+            duration: 1.8,
+            ease: "expo.out",
+            delay: 0.8
+        })
+        .to("#functional", {
+            opacity: 1,
+            letterSpacing: "0.5em",
+            duration: 2,
+            ease: "power2.out"
+        }, "-=1")
+        .to("#continue-btn", {
+            opacity: 1,
+            y: -10,
+            duration: 1.5,
+            ease: "power3.out"
+        }, "-=1.2");
+
+        // Continue Button Logic
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            lenis.start();
+            gsap.to("#opening", {
+                y: "-100%",
+                duration: 2,
+                ease: "expo.inOut",
+                onComplete: () => {
+                    document.getElementById('opening').style.display = 'none';
+                    initMainAnimations();
+                }
+            });
+            gsap.to("#main-content", {
+                opacity: 1,
+                duration: 1.5,
+                delay: 1
+            });
+        });
+
+        // Initially stop scrolling
+        lenis.stop();
+
+        function initMainAnimations() {
+            // Intro Section Text Reveals
+            const introLines = gsap.utils.toArray('.intro-line span');
+            introLines.forEach((line, i) => {
+                gsap.to(line, {
+                    y: 0,
+                    duration: 1.5,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: line,
+                        start: "top 90%",
+                    },
+                    delay: i * 0.2
+                });
+            });
+
+            gsap.to("#paado-reveal", {
+                opacity: 1,
+                y: -10,
+                duration: 1.2,
+                scrollTrigger: {
+                    trigger: "#paado-reveal",
+                    start: "top 90%",
+                }
+            });
+
+            // Evidence 01 Reveal
+            gsap.to(".evidence-subtext", {
+                opacity: 1,
+                y: -10,
+                duration: 1.2,
+                scrollTrigger: {
+                    trigger: ".evidence-subtext",
+                    start: "top 85%",
+                }
+            });
+
+            // Morning Sequence (Horizontal/Vertical hybrid feel)
+            const morningItems = gsap.utils.toArray('.morning-item');
+            morningItems.forEach((item, i) => {
+                gsap.to(item, {
+                    color: "#1C1C1C",
+                    opacity: 1,
+                    scale: 1.1,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 60%",
+                        end: "top 40%",
+                        scrub: true,
+                    }
+                });
+            });
+
+            // Background Clock Hand Rotation
+            gsap.to("#clock-hand", {
+                rotate: 360,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#morning-sequence",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 2,
+                }
+            });
+
+            // Food Philosophy Reveals
+            gsap.utils.toArray('.food-reveal').forEach(el => {
+                gsap.to(el, {
+                    opacity: 1,
+                    y: -10,
+                    duration: 1.5,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    }
+                });
+            });
+
+            gsap.utils.toArray('.food-word').forEach(word => {
+                gsap.to(word, {
+                    color: "#708B75",
+                    scrollTrigger: {
+                        trigger: word,
+                        start: "top 70%",
+                        end: "top 30%",
+                        scrub: true,
+                    }
+                });
+            });
+
+            // Horizontal Scroll (Identity Archive)
+            const horizontalScroll = document.querySelector('.horizontal-scroll');
+            const identityItems = gsap.utils.toArray('.identity-item');
+            
+            gsap.to(horizontalScroll, {
+                x: () => -(horizontalScroll.scrollWidth - window.innerWidth + (window.innerWidth * 0.2)),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#identity-section",
+                    start: "top top",
+                    end: () => `+=${horizontalScroll.scrollWidth}`,
+                    scrub: 1,
+                    pin: true,
+                }
+            });
+
+            // Driving Section Reveal
+            const drivingTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#driving-section",
+                    start: "top top",
+                    end: "+=300%",
+                    pin: true,
+                    scrub: 1,
+                    onUpdate: (self) => {
+                        // Impact moment: color shift
+                        if (self.progress > 0.65 && self.progress < 0.85) {
+                            gsap.to("#driving-section", { backgroundColor: "#A94442", duration: 0.3 });
+                        } else {
+                            gsap.to("#driving-section", { backgroundColor: "#1C1C1C", duration: 0.3 });
+                        }
+                    }
+                }
+            });
+
+            gsap.utils.toArray('.driving-text').forEach((text, i) => {
+                drivingTl.to(text, { opacity: 1, y: 0, duration: 1 }, i * 1.5);
+            });
+
+            // The Shout!
+            drivingTl.to("#shout", {
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                ease: "expo.out"
+            }, "-=1");
+
+            // Road Lines Animation
+            gsap.to(".road-line", {
+                x: "110vw",
+                repeat: -1,
+                duration: 1.5,
+                ease: "none"
+            });
+
+            // Evidence 02 Reveal
+            gsap.to(".evidence-subtext-2", {
+                opacity: 1,
+                y: -10,
+                duration: 1.2,
+                scrollTrigger: {
+                    trigger: ".evidence-subtext-2",
+                    start: "top 85%",
+                }
+            });
+
+            // Professional Contradictions
+            gsap.to(".contradiction-reveal span", {
+                y: 0,
+                duration: 1.5,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: ".contradiction-reveal",
+                    start: "top 85%",
+                }
+            });
+
+            gsap.utils.toArray('.contradiction-item').forEach((item, i) => {
+                gsap.to(item, {
+                    opacity: 1,
+                    y: -5,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 90%",
+                    },
+                    delay: 0.5 + (i * 0.2)
+                });
+            });
+
+            gsap.to("#final-punchline", {
+                opacity: 1,
+                y: -10,
+                duration: 1.5,
+                scrollTrigger: {
+                    trigger: "#final-punchline",
+                    start: "top 80%",
+                }
+            });
+
+            // Motivational Section
+            const motivationalTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#motivational-section",
+                    start: "top 40%",
+                    onEnter: () => gsap.to("#motivational-bg", { opacity: 1, duration: 2.5 })
+                }
+            });
+
+            gsap.utils.toArray('.motivational-line').forEach((line, i) => {
+                motivationalTl.to(line, { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1.5, 
+                    ease: "power2.out" 
+                }, i * 1.2);
+            });
+
+            motivationalTl.to("#motivational-punchline", { 
+                opacity: 1, 
+                scale: 1, 
+                duration: 2.5, 
+                ease: "expo.out" 
+            }, "+=0.8")
+            .to(".motivational-line-small", { 
+                opacity: 1, 
+                y: 0, 
+                duration: 2 
+            }, "+=0.5");
+
+            // Final Section
+            gsap.utils.toArray('.end-reveal').forEach((el, i) => {
+                gsap.to(el, {
+                    opacity: 1,
+                    y: -10,
+                    duration: 1.5,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                    },
+                    delay: i * 0.2
+                });
+            });
+            // Image Reveal & Parallax
+            gsap.utils.toArray('.image-reveal-container').forEach(container => {
+                const img = container.querySelector('img');
+                
+                // Reveal animation
+                gsap.fromTo(container, 
+                    { clipPath: "inset(100% 0% 0% 0%)" },
+                    { 
+                        clipPath: "inset(0% 0% 0% 0%)",
+                        duration: 2,
+                        ease: "expo.out",
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top 90%",
+                        }
+                    }
+                );
+
+                // Subtext reveal
+                const subtext = container.nextElementSibling;
+                if (subtext && (subtext.classList.contains('evidence-subtext') || subtext.classList.contains('evidence-subtext-2'))) {
+                    gsap.to(subtext, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.5,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top 70%",
+                        }
+                    });
+                }
+
+                // Inner Parallax
+                if (img) {
+                    gsap.to(img, {
+                        yPercent: 15,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                }
+            });
+
+            // Identity Archive Image Parallax
+            gsap.utils.toArray('.identity-img').forEach(img => {
+                gsap.to(img, {
+                    scale: 1.2,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: img,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            });
+        }
+
+        // Restart Logic
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            gsap.to("body", {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    window.scrollTo(0, 0);
+                    location.reload();
+                }
+            });
+        });
+
+        // Easter Egg: "paadoji"
+        let keys = "";
+        document.addEventListener('keydown', (e) => {
+            keys += e.key.toLowerCase();
+            if (keys.includes("paadoji")) {
+                const egg = document.getElementById('easter-egg');
+                const t = document.createElement('div');
+                t.innerHTML = "ACCESS GRANTED UNFORTUNATELY";
+                t.className = "fixed font-serif text-accentRed text-4xl whitespace-nowrap opacity-0 select-none pointer-events-none";
+                t.style.left = Math.random() * 70 + 15 + "%";
+                t.style.top = Math.random() * 70 + 15 + "%";
+                egg.appendChild(t);
+                
+                gsap.fromTo(t, { scale: 0.5, opacity: 0 }, { 
+                    scale: 1, 
+                    opacity: 1, 
+                    duration: 1, 
+                    ease: "elastic.out(1, 0.3)",
+                    onComplete: () => {
+                        gsap.to(t, { opacity: 0, y: -100, duration: 1, delay: 1, onComplete: () => t.remove() });
+                    }
+                });
+                keys = "";
+            }
+            if (keys.length > 20) keys = keys.slice(-20);
+        });
+    </script>
+</body>
+</html>
