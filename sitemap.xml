@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://www.thepaadojiproject.online/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.thepaadojiproject.online/1.jpg</image:loc>
+      <image:title>Evidence 01 – Prachi Jain</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.thepaadojiproject.online/2.jpg</image:loc>
+      <image:title>Paado Ji – Dataset P-02</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.thepaadojiproject.online/3.jpg</image:loc>
+      <image:title>Evidence 02 – Prachi Jain</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.thepaadojiproject.online/4.jpg</image:loc>
+      <image:title>Jiggly Puff – Dataset P-03</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.thepaadojiproject.online/5.jpg</image:loc>
+      <image:title>Prachi Jain – Dataset P-01</image:title>
+    </image:image>
+  </url>
+
+</urlset>
